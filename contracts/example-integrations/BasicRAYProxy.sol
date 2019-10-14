@@ -34,8 +34,7 @@ import "./ray/IRAYStorage.sol";
 /// @notice  Example of integrating with RAY through a smart contract. This contract
 ///          acts as a basic proxy for your users. It takes ownership of
 ///          minted RAY tokens in a trust-less manner. It needs ownership to
-///          withdraw on behalf of your users if you're routing their calls through
-///          here.
+///          withdraw on behalf of your users (if that is what you want).
 ///
 ///          RAY supports paying for user-transactions, which is what the code
 ///          that mentions 'Payer' or 'GasFunder' is referring too. This is a
@@ -43,6 +42,7 @@ import "./ray/IRAYStorage.sol";
 ///          we do you may want to have the support already built-into your contract.
 ///
 /// @dev     Quickly thrown together, so may contain bugs. Please test appropriately.
+///          NOTE: This contract is not in production or being used currently.
 ///
 /// Author:  Devan Purhar
 
