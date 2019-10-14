@@ -9,7 +9,7 @@ RAY is a work in progress and several anticipated features have yet to be implem
 ## Table of Contents
 
 - [Overview](https://github.com/Stakedllc/robo-advisor-yield/wiki)
-- [Developers (deployed addresses, documentation)](https://github.com/Stakedllc/robo-advisor-yield/wiki/Developers)
+- [Developers (deployed addresses, documentation)](https://staked.gitbook.io/staked/ray/smart-contract-integration)
 - [Security](https://github.com/Stakedllc/robo-advisor-yield/wiki/Security)
 - [Requests for Contracts](https://github.com/Stakedllc/robo-advisor-yield/wiki/Requests-for-Contracts)
 - [Frequently Asked Questions](https://staked.zendesk.com/hc/en-us/sections/360006555872-Robo-Advisor-for-Yield-FAQs)
