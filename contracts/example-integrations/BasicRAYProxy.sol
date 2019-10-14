@@ -33,7 +33,7 @@ import "./ray/IRAYStorage.sol";
 
 /// @notice  Example of integrating with RAY through a smart contract. This contract
 ///          acts as a basic proxy for your users. It takes ownership of
-///          minted RAY tokens in a trust-less manner. It needs ownership to
+///          minted RAY tokens in a trust-less manner because it needs ownership to
 ///          withdraw on behalf of your users (if that is what you want).
 ///
 ///          RAY supports paying for user-transactions, which is what the code
@@ -41,8 +41,11 @@ import "./ray/IRAYStorage.sol";
 ///          separate smart contract - currently we haven't deployed it, but when
 ///          we do you may want to have the support already built-into your contract.
 ///
-/// @dev     Quickly thrown together, so may contain bugs. Please test appropriately.
-///          NOTE: This contract is not in production or being used currently.
+/// @dev     Quickly put together and un-tested. Please test appropriately if using.
+///          
+/// NOTE:    This contract is not in production or being used currently by Staked. This
+///          is a quick example, and one needs to conduct their own testing to ensure
+///          expected behaviours.
 ///
 /// Author:  Devan Purhar
 
