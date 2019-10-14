@@ -1,0 +1,357 @@
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "deprecated",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "_storage",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "__storage",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "yield",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateYield",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "setDeprecated",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "unrealizedYield",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPricePerShare",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "unrealizedYield",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTotalYieldPerShare",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "unrealizedYield",
+        "type": "uint256"
+      },
+      {
+        "name": "realizedYield",
+        "type": "uint256"
+      },
+      {
+        "name": "withdrawnYield",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTotalYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getPortfolioUnrealizedYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "amountToWithdraw",
+        "type": "uint256"
+      }
+    ],
+    "name": "getOpportunityUnrealizedYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityId",
+        "type": "bytes32"
+      },
+      {
+        "name": "amountToWithdraw",
+        "type": "uint256"
+      }
+    ],
+    "name": "getOpportunityYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getOpportunityBalance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalToken",
+        "type": "address"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "calculatePayableAmount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "origCaller",
+        "type": "address"
+      },
+      {
+        "name": "msgSender",
+        "type": "address"
+      }
+    ],
+    "name": "onlyTokenOwner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "typeId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTokenValue",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getPortfolioPricePerShare",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "opportunityId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getOpportunityPricePerShare",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

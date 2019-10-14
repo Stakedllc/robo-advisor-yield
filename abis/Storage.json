@@ -1,0 +1,1421 @@
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "governanceWalletAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa8b799e9"
+  },
+  {
+    "inputs": [
+      {
+        "name": "_governanceWalletAddress",
+        "type": "address"
+      },
+      {
+        "name": "_weth",
+        "type": "address"
+      },
+      {
+        "name": "_dai",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "signature": "constructor"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getGovernanceWallet",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xdb404236"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "target",
+        "type": "address"
+      }
+    ],
+    "name": "getIsOracle",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xc8f544cc"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "contractName",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getContractAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x0d2020dd"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "contractName",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getVerifier",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xeeb7b248"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTokenKey",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x43aee400"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getOpportunities",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x69a4e7ac"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getPrincipalAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x3f1793c3"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getIsERC20",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x53024bae"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getMinAmount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x5eb62178"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getRaised",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x234817e7"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getBenchmarkRate",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa79d3a16"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getCumulativeRate",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x549bc14d"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getLastUpdatedRate",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xf06cbb5d"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getACPContribution",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xfd134706"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityKey",
+        "type": "bytes32"
+      }
+    ],
+    "name": "isValidOpportunity",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x241adc55"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTokenShares",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xd400d43a"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTokenCapital",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x2d577a50"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTokenAllowance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xc02db903"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getEntryRate",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x514af3fa"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunity",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getOpportunityToken",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xc80a2929"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "opportunityKey",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getPrincipal",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x5ecc1317"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getPausedMode",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x617ddc7f"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRealizedYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x39cbe718"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getWithdrawnYield",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x87d985b0"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getAvailableCapital",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x270ce10c"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getShareSupply",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x1843b73c"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getBoolean",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x90190df3"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getInt",
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa6fbf3d2"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getUint",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x7a6ad926"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getAddress",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xd3a39686"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getString",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x31477b9b"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getBytes",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xc7750f29"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newGovernanceWallet",
+        "type": "address"
+      }
+    ],
+    "name": "setGovernanceWallet",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x607c219f"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "oracle",
+        "type": "address"
+      },
+      {
+        "name": "action",
+        "type": "bool"
+      }
+    ],
+    "name": "setOracle",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x65360843"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "theStorageWrapper",
+        "type": "address"
+      },
+      {
+        "name": "action",
+        "type": "bool"
+      }
+    ],
+    "name": "setStorageWrapperContract",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x8cdaab8f"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "contractAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setVerifier",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xa692b9ef"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "contractName",
+        "type": "bytes32"
+      },
+      {
+        "name": "contractAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setContractAddress",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe001f841"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setTokenKey",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf1380bc3"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "_isERC20",
+        "type": "bool"
+      }
+    ],
+    "name": "setIsERC20",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x6bbe502f"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "_minAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinAmount",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xd5708d5a"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "_raised",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRaised",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xd37b4cf4"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "newBenchmarkRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setBenchmarkRate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x67b98d9e"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "newCumulativeRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setCumulativeRate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xa7cc87d7"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "newLastUpdatedRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setLastUpdatedRate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x88a538b3"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "principalAddress",
+        "type": "address"
+      },
+      {
+        "name": "newACPContribution",
+        "type": "uint256"
+      }
+    ],
+    "name": "setACPContribution",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xfa6d3d2e"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "deleteTokenValues",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe08f6450"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityKey",
+        "type": "bytes32"
+      },
+      {
+        "name": "_principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "addOpportunity",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x407930dd"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "_principalAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setPrincipalAddress",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x8116b842"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityKey",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setValidOpportunity",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe3b28265"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenShares",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTokenShares",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xbde449be"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenCapital",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTokenCapital",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xd2767108"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenAllowance",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTokenAllowance",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x9a1b9ac0"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "entryRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setEntryRate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x496b5773"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunity",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setOpportunityToken",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xc424cefb"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "opportunityKey",
+        "type": "bytes32"
+      },
+      {
+        "name": "principalAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPrincipal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x9ff46d1c"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setPausedOn",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf74936a4"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setPausedOff",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x3624d30c"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "newRealizedYield",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRealizedYield",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x2391e9f5"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "newWithdrawnYield",
+        "type": "uint256"
+      }
+    ],
+    "name": "setWithdrawnYield",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xc40a302e"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "newAvailableCapital",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAvailableCapital",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xbce31655"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "newShareSupply",
+        "type": "uint256"
+      }
+    ],
+    "name": "setShareSupply",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x60a8c77b"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "setBoolean",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xda1b9163"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "int256"
+      }
+    ],
+    "name": "setInt",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x061c8800"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "setUint",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x1d60084b"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "address"
+      }
+    ],
+    "name": "setAddress",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x79a7cfee"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      }
+    ],
+    "name": "setString",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x235913f5"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ray",
+        "type": "bytes32"
+      },
+      {
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "bytes"
+      }
+    ],
+    "name": "setBytes",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xb4bfee4b"
+  }
+]

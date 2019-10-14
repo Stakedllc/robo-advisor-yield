@@ -1,0 +1,445 @@
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "deprecated",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x0e136b19"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "_storage",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xc3fb90d6"
+  },
+  {
+    "inputs": [
+      {
+        "name": "__storage",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "signature": "constructor"
+  },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogMintRAYT",
+    "type": "event",
+    "signature": "0xcaa99c5e7fccf6b825123d43a3a0b2eef27bd660674d034d19863a26e3324c82"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "portfolioId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogMintOpportunityToken",
+    "type": "event",
+    "signature": "0x1709f3a866fd83c44ec76fced7fe86fb2689a569fc9c9d77bd40a005ab3613c9"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "tokenValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogWithdrawFromRAYT",
+    "type": "event",
+    "signature": "0x0888b93d39a18cb87358a4f14b87ab41f9314227dbe3f13b9a12d5714e2e88c4"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "tokenValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogBurnRAYT",
+    "type": "event",
+    "signature": "0x0bd3fcb807f1d221b244db840e76cf0397f60bebc84a4e9d899cf85bf1076582"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "tokenValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogDepositToRAYT",
+    "type": "event",
+    "signature": "0xfff8686c8b56b6a19106d2a4b11b38aaa74223776a3e39810930c5d3e6a08f0d"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "mint",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function",
+    "signature": "0x7ed9db59"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "deposit",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function",
+    "signature": "0x1de26e16"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "tokenId",
+        "type": "bytes32"
+      },
+      {
+        "name": "valueToWithdraw",
+        "type": "uint256"
+      },
+      {
+        "name": "originalCaller",
+        "type": "address"
+      }
+    ],
+    "name": "redeem",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x112ad90b"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC721Received",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x150b7a02"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunity",
+        "type": "address"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "name": "subtract",
+        "type": "bool"
+      }
+    ],
+    "name": "lend",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x37310a8a"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunityId",
+        "type": "bytes32"
+      },
+      {
+        "name": "opportunity",
+        "type": "address"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "name": "add",
+        "type": "bool"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x9db165c5"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "portfolioId",
+        "type": "bytes32"
+      },
+      {
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferFunds",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xc18eb1ec"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe1f21c67"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x367605ca"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "setDeprecated",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xd848dee7"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "value",
+        "type": "uint256"
+      },
+      {
+        "name": "principalToken",
+        "type": "address"
+      },
+      {
+        "name": "isERC20",
+        "type": "bool"
+      }
+    ],
+    "name": "fallbackClaim",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xd1432e89" 
+  }
+]
