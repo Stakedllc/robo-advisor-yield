@@ -25,9 +25,9 @@ yarn or npm install
 ```
 
 ## Testing
-This project uses the [Truffle Framework](https://www.trufflesuite.com/). Contract tests are defined under the [test directory](). Truffle leverages the [Mocha Test Framework](https://mochajs.org/). 
+This project uses the [Truffle Framework](https://www.trufflesuite.com/). Contract tests are defined under the [test directory](https://github.com/Stakedllc/robo-advisor-yield/tree/master/test). Truffle leverages the [Mocha Test Framework](https://mochajs.org/). 
 
-The below commands run tests using Truffle/Mocha. The tests use a chain seeded with the RAY protocol. An example test for RAY smart contract integration exists [here]().
+The below commands run tests using Truffle/Mocha. The tests use a chain seeded with the RAY protocol. An example test for RAY smart contract integration exists [here](https://github.com/Stakedllc/robo-advisor-yield/blob/master/test/testIntegration.js).
 
 ### Using [Docker](https://www.docker.com/)
 ------------------------------------------------------
