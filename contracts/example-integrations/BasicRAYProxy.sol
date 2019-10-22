@@ -33,19 +33,16 @@ import "./ray/IRAYStorage.sol";
 
 /// @notice  Example of integrating with RAY through a smart contract. This contract
 ///          acts as a basic proxy for your users. It takes ownership of
-///          minted RAY tokens in a trust-less manner because it needs ownership to
-///          withdraw on behalf of your users (if that is what you want).
+///          minted RAY tokens in a trust-less manner. It needs ownership to
+///          withdraw on behalf of your users if you're routing their calls through
+///          here.
 ///
 ///          RAY supports paying for user-transactions, which is what the code
 ///          that mentions 'Payer' or 'GasFunder' is referring too. This is a
 ///          separate smart contract - currently we haven't deployed it, but when
 ///          we do you may want to have the support already built-into your contract.
 ///
-/// @dev     Quickly put together and un-tested. Please test appropriately if using.
-///          
-/// NOTE:    This contract is not in production or being used currently by Staked. This
-///          is a quick example, and one needs to conduct their own testing to ensure
-///          expected behaviours.
+/// @dev     Quickly thrown together, so may contain bugs. Please test appropriately.
 ///
 /// Author:  Devan Purhar
 
@@ -68,8 +65,19 @@ contract BasicRAYProxy is IERC721Receiver {
   IRAYStorage public rayStorage;
 
   // map the 'true' owners of the RAY tokens owned by this contract
-  mapping(bytes32 => address) rayTokens;
+  mapping(bytes32 => address) public rayTokens;
 
+
+  /*************** EVENT DECLARATIONS **************/
+
+
+  /// @notice  Logs the minting of a RAY token
+  event ProxyMintedRAYT(
+      bytes32 tokenId,
+      bytes32 portfolioId,
+      address beneficiary,
+      uint value
+  );
 
   /*************** MODIFIER DECLARATIONS **************/
 
@@ -158,6 +166,8 @@ contract BasicRAYProxy is IERC721Receiver {
     // map RAY's to their true owners
     rayTokens[rayTokenId] = beneficiary;
 
+    ProxyMintedRAYT(rayTokenId, portfolioId, beneficiary, value);
+
     return rayTokenId;
 
   }
@@ -197,7 +207,7 @@ contract BasicRAYProxy is IERC721Receiver {
     address rayContract = rayStorage.getContractAddress(PORTFOLIO_MANAGER_CONTRACT);
 
     uint valueAfterFee = RAY(rayContract).redeem(rayTokenId, valueToWithdraw, originalCaller);
-
+    
     address beneficiary = rayTokens[rayTokenId];
     transferFunds(portfolioId, beneficiary, valueAfterFee);
 

@@ -1,0 +1,36 @@
+{
+  "name": "robo-advisor-yield",
+  "version": "0.1.0",
+  "description": "The Robo-Advisor for Yield",
+  "main": "truffle.js",
+  "scripts": {
+    "test": "truffle test",
+    "chain": "ganache-cli -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'",
+    "docker_test": "truffle test --network docker",
+    "docker_chain": "ganache-cli -h 0.0.0.0 -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stakedllc/robo-advisor-yield.git"
+  },
+  "keywords": [
+    "staked",
+    "ray",
+    "robo-advisor",
+    "ethereum",
+    "defi"
+  ],
+  "author": "Staked Securely, Inc.",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "bignumber.js": "4.1.0",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "chai-bignumber": "2.0.2",
+    "ganache-cli": "6.4.1"
+  },
+  "dependencies": {
+    "truffle": "5.0.2",
+    "truffle-hdwallet-provider": "1.0.2"
+  }
+}

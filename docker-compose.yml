@@ -1,0 +1,18 @@
+version: '3'
+services:
+  chain:
+    build: .
+    image: robo_advisor_yield
+    command: yarn-run docker_chain
+    ports:
+    - 8545:8545
+
+  test:
+    image: robo_advisor_yield
+    command: yarn-run docker_test
+    stdin_open: true
+    tty: true
+    ports:
+    - 8080:8080
+    depends_on:
+    - chain
