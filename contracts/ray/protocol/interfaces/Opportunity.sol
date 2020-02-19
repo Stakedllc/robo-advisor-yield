@@ -49,9 +49,11 @@ interface Opportunity {
   function withdraw(address tokenAddress, address beneficiary, uint amount, bool isERC20) external;
 
 
-  /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
+  /// @notice  The amount supplied + yield generated in the underlying Opportunity
   ///
   /// @param   tokenAddress - address of the token to get the balance of
+  ///
+  /// @return  the total balance in the native base units of the token
   function getBalance(address tokenAddress) external view returns (uint);
 
 }
