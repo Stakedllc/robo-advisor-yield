@@ -43,7 +43,7 @@ library BatchActions {
 }
 
 interface IDDEX {
-    function batch(BatchActions.Action[] calldata actions) external payable;
+    function batch(BatchActions.Action[] actions) external payable;
     function getAmountSupplied(address, address)
         external
         view

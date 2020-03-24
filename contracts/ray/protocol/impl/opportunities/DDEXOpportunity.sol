@@ -135,10 +135,11 @@ contract DDEXOpportunity is Opportunity, MarketByContract {
         }
 
         // build DDEX batch actions
-        Action memory action;
-        action.ActionType = ActionType.Supply;
-        action.encodedParams = abi.encode(tokenAddress, uint256(value));
-        Action[] memory actions = new Action[](1);
+        BatchActions.Action memory action = BatchActions.Action(
+            BatchActions.ActionType.Supply,
+            abi.encode(tokenAddress, uint256(value))
+        );
+        BatchActions.Action[] memory actions = new BatchActions.Action[](1);
         actions[0] = action;
 
         // DDEX batch doesn't return anything and reverts on error
@@ -159,15 +160,17 @@ contract DDEXOpportunity is Opportunity, MarketByContract {
         address tokenAddress = tokenIdentifier[principalToken];
 
         require(
-            getBalance(principalToken) <= valueToWithdraw,
+            IDDEX(_DDEX).getAmountSupplied(tokenAddress, this) <=
+                valueToWithdraw,
             "DDEXImpl withdraw(): Balance not enough"
         );
 
         // build DDEX batch actions
-        Action memory action;
-        action.ActionType = ActionType.Unsupply;
-        action.encodedParams = abi.encode(tokenAddress, uint256(value));
-        Action[] memory actions = new Action[](1);
+        BatchActions.Action memory action = BatchActions.Action(
+            BatchActions.ActionType.Unsupply,
+            abi.encode(tokenAddress, uint256(valueToWithdraw))
+        );
+        BatchActions.Action[] memory actions = new BatchActions.Action[](1);
         actions[0] = action;
 
         IDDEX(_DDEX).batch(actions);
