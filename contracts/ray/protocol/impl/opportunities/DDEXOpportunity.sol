@@ -95,10 +95,21 @@ contract DDEXOpportunity is Opportunity, MarketByContract {
     ///
     /// @param   __storage - The Storage contracts address
     /// @param   __DDEXAddress - DDEX contracts address
-
-    constructor(address __storage, address __DDEXAddress) public {
+    /// @param   principalTokens - The coin contract addresses
+    /// @param   ddexTokenIds - The DDEX platform contracts that map to each coin
+    constructor(
+        address __storage, 
+        address __DDEXAddress,
+        address[] memory principalTokens,
+        address[] memory ddexTokenIds
+    ) 
+        public 
+    {
         _storage = Storage(__storage);
         _DDEX = __DDEXAddress;
+
+        _addPrincipalTokens(principalTokens, ddexTokenIds);
+
     }
 
     /// @notice  Fallback function to receive Ether
@@ -210,23 +221,28 @@ contract DDEXOpportunity is Opportunity, MarketByContract {
 
     /** ----------------- ONLY ADMIN MUTATORS ----------------- **/
 
+
     /// @notice  Add support for a coin
+    ///
+    ///          DDEX uses the token address to identify erc20 tokens
+    ///          and 0x000000000000000000000000000000000000000E for Ether
     ///
     /// @dev     This is configured in-contract since it's not common across Opportunities
     ///
     /// @param   principalTokens - The coin contract addresses
-    /// @param   DDEXTokenId - The token id on DDEX platform contracts
-    /// DDEX use token address to identify erc20 tokens
-    /// while 0x000000000000000000000000000000000000000E for Ether
+    /// @param   ddexTokenIds - The DDEX platform tokenId's that map to each coin
     function addPrincipalTokens(
-        address[] memory principalTokens,
-        address[] memory DDEXTokenId // not using external b/c use memory to pass in array
-    ) public onlyAdmin {
-        for (uint256 i = 0; i < principalTokens.length; i++) {
-            tokenIdentifier[principalTokens[i]] = DDEXTokenId[i];
-        }
-    }
+      address[] memory principalTokens,
+      address[] memory ddexTokenIds
+    )
+      public // not using external b/c use memory to pass in array
+      onlyAdmin
+    {
 
+      _addPrincipalTokens(principalTokens, ddexTokenIds);
+
+    }
+    
     /** ----------------- VIEW ACCESSORS ----------------- **/
 
     /// @notice  Get the current balance we have in the Opp. (principal + interest generated)
@@ -244,3 +260,31 @@ contract DDEXOpportunity is Opportunity, MarketByContract {
     }
 
 }
+
+
+    /** ----------------- INTERNAL FUNCTIONS ----------------- **/
+
+
+    /// @notice  Used to add coins support to this Opportunities configuration
+    ///
+    ///          DDEX uses the token address to identify ERC20 tokens
+    ///          and 0x000000000000000000000000000000000000000E for Ether
+    ///
+    /// @dev     Internal version so can be called from the constructor and Admin Contract
+    ///
+    /// @param   principalTokens - The coin contract addresses
+    /// @param   ddexTokenIds - The DDEX platform contracts that map to each coin
+    function _addPrincipalTokens(
+      address[] memory principalTokens,
+      address[] memory ddexTokenIds
+    )
+      internal
+    {
+
+      for (uint i = 0; i < principalTokens.length; i++) {
+
+        tokenIdentifier[principalTokens[i]] = ddexTokenIds[i];
+
+      }
+
+    }
