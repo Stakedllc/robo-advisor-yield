@@ -17,7 +17,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.4.25",
+      version: "0.5.11",
     },
   },
   solc: {
@@ -25,5 +25,6 @@ module.exports = {
            enabled: true,
            runs: 200
        }
-   }
+   },
+ contracts_directory: "./contracts-v2/"
 };
