@@ -1,18 +1,21 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.5.17;
+pragma solidity 0.5.16;
 
-import "./interfaces/IOpportunity.sol";
-import "./libraries/Initializable.sol";
-import "./interfaces/IStorage.sol";
-
+import { IOpportunity } from  "./interfaces/IOpportunity.sol";
+import { Initializable } from "./libraries/Initializable.sol";
+import { IStorage } from "./interfaces/IStorage.sol";
+// import { IERC20 } from'./interfaces/IERC20.sol';
+import "./openzeppelin/SafeERC20.sol";
 
 // Remove hardhat/console.sol for production
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
-import { IMasset } from "@mstable/protocol/contracts/interfaces/IMasset.sol";
-import { ISavingsContract } from "@mstable/protocol/contracts/interfaces/ISavingsContract.sol";
+import { IMasset } from "./interfaces/IMasset.sol";
+import { ISavingsContract } from "./interfaces/ISavingsContract.sol";
+import { IMStableHelper } from './interfaces/IMStableHelper.sol';
 // import IERC20 from ''
-contract MStable is IOpportunity, Initializable {
+contract MStableOpportunity is IOpportunity, Initializable {
+  using SafeERC20 for IERC20;
 
   bytes32 internal constant ADMIN_CONTRACT = keccak256("AdminContract");
   bytes32 internal constant OPPORTUNITY_MANAGER_CONTRACT = keccak256("RAYv3Contract");
@@ -25,6 +28,8 @@ contract MStable is IOpportunity, Initializable {
 
 
   ISavingsContract public savingsContract;
+  address public saveAddress;
+  IMStableHelper public helper;
   // NOTE: Mapping can be changed to a struct or any other data structure needed
   // Ex:
   // 
@@ -69,12 +74,14 @@ contract MStable is IOpportunity, Initializable {
     address[] memory principalToken,  // Optional
     address[] memory otherToken,
     address _savingsContract,
+    address _mStableHelper
     //address _opportunityManager,      // Optional
     // <add any parameters neeeded>
   ) public initializer {
     rayStorage = IStorage(storage_contract);
-    savingContracts = ISavingsContract(_savingContracts)
-    
+    savingsContract = ISavingsContract(_savingsContract);
+    helper = IMStableHelper(_mStableHelper);
+    saveAddress = _savingsContract;
 
     _addPrincipalTokens(principalToken, otherToken);
 
@@ -91,17 +98,18 @@ contract MStable is IOpportunity, Initializable {
   ///                           case of ETH
   /// @param   amount - amount in the smallest unit of the token to supply
   /// @param   isERC20 - boolean if the token follows the ERC20 standard
-  function supply(address token, uint amount, bool isERC20) external onlyOpportunityManager payable {
+  function supply(address token, uint amount, bool isERC20) external payable onlyOpportunityManager {
    //  address compoundMarket = markets[principalToken];
-        massetContract = markets[token]
+       address massetContract = markets[token];
 
       // mint MAsset
+      
         IERC20(token).safeApprove(massetContract, uint256(-1));
         uint256 _amount = IMasset(massetContract).mint(token, amount);
 
       // deposit to savings
-
-        IERC20(massetContract).safeApprove(savingsContract, uint256(-1));
+     
+        IERC20(massetContract).safeApprove(saveAddress, uint256(-1));
         savingsContract.depositSavings(_amount);
 
 
@@ -120,17 +128,19 @@ contract MStable is IOpportunity, Initializable {
   /// @param   beneficiary - address to send the token too
   /// @param   amount - amount in the smallest unit of the token to supply
   /// @param   isERC20 - boolean if the token follows the ERC20 standard
+
   function withdraw(address token, address beneficiary, uint amount, bool isERC20) external onlyOpportunityManager {
+        
+         address massetContract = markets[token];
          
-         
-         uint256 creditsToRedeem = helper.getSaveRedeemInput(save, amount);
+         uint256 creditsToRedeem = helper.getSaveRedeemInput(savingsContract, amount);
         uint256 _bAssetQuantity = savingsContract.redeem(creditsToRedeem);
          
-        uint256 value = IMasset(massetContract).redeem(_bAsset, _bAssetQuantity);
+        uint256 value = IMasset(massetContract).redeem(token, _bAssetQuantity);
          
          
-         // missing part where the opportunity manager transfer tokens to owner
-         IERC20(token).transfer(beneficiary, value)
+        
+         IERC20(token).transfer(beneficiary, value);
   
   }
 
