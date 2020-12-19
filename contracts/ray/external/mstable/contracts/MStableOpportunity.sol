@@ -30,6 +30,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
   ISavingsContract public savingsContract;
   address public saveAddress;
   IMStableHelper public helper;
+  address public mUSD;
   // NOTE: Mapping can be changed to a struct or any other data structure needed
   // Ex:
   // 
@@ -74,7 +75,8 @@ contract MStableOpportunity is IOpportunity, Initializable {
     address[] memory principalToken,  // Optional
     address[] memory otherToken,
     address _savingsContract,
-    address _mStableHelper
+    address _mStableHelper,
+    address _mUSD
     //address _opportunityManager,      // Optional
     // <add any parameters neeeded>
   ) public initializer {
@@ -82,6 +84,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
     savingsContract = ISavingsContract(_savingsContract);
     helper = IMStableHelper(_mStableHelper);
     saveAddress = _savingsContract;
+    mUSD = _mUSD;
 
     _addPrincipalTokens(principalToken, otherToken);
 
@@ -98,22 +101,27 @@ contract MStableOpportunity is IOpportunity, Initializable {
   ///                           case of ETH
   /// @param   amount - amount in the smallest unit of the token to supply
   /// @param   isERC20 - boolean if the token follows the ERC20 standard
-  function supply(address token, uint amount, bool isERC20) external payable onlyOpportunityManager {
+ 
+ 
+
+      
+ 
+  function supply(address token, uint amount, bool isERC20) external payable {
    //  address compoundMarket = markets[principalToken];
        address massetContract = markets[token];
 
-      // mint MAsset
-      
-        IERC20(token).safeApprove(massetContract, uint256(-1));
-        uint256 _amount = IMasset(massetContract).mint(token, amount);
+      // transfer asset to the opportunity contract
 
+        IERC20(token).transferFrom(msg.sender,address(this),amount);
+
+      // mint new mUSD to deposit into savings contract
+        uint256 _amount = IMasset(massetContract).mint(token, amount);
+          
       // deposit to savings
-     
-        IERC20(massetContract).safeApprove(saveAddress, uint256(-1));
         savingsContract.depositSavings(_amount);
 
 
-
+       
 
 
       
@@ -129,21 +137,37 @@ contract MStableOpportunity is IOpportunity, Initializable {
   /// @param   amount - amount in the smallest unit of the token to supply
   /// @param   isERC20 - boolean if the token follows the ERC20 standard
 
-  function withdraw(address token, address beneficiary, uint amount, bool isERC20) external onlyOpportunityManager {
+  function withdraw(address token, address beneficiary, uint amount, bool isERC20) external {
         
          address massetContract = markets[token];
          
+        // calculate credits
          uint256 creditsToRedeem = helper.getSaveRedeemInput(savingsContract, amount);
+       
+        // get back mUSD asset from savings contract
         uint256 _bAssetQuantity = savingsContract.redeem(creditsToRedeem);
-         
+      
+       // redeem mUSD for USDT 
         uint256 value = IMasset(massetContract).redeem(token, _bAssetQuantity);
+
+        // decimal issue in USDT 
+        uint256 valueUSDT = value/1000000000000;
          
-         
-        
-         IERC20(token).transfer(beneficiary, value);
+        // transfer USDT to beneficiary
+        IERC20(token).transfer(beneficiary, valueUSDT);
   
   }
 
+// TO APPROVE OUT OF THE CONTRACT 
+// we approve infinity both on token and massetContract, still need TBD when we approve
+ function approveOnce(address token) external {
+      
+      address massetContract = markets[token];
+      IERC20(token).safeApprove(massetContract, uint256(-1));
+      IERC20(massetContract).safeApprove(saveAddress, uint256(-1));
+    
+
+ }
 
   /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
   ///
