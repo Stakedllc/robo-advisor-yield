@@ -159,7 +159,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
   }
 
 // TO APPROVE OUT OF THE CONTRACT 
-// we approve infinity both on token and massetContract, still need TBD when we approve
+// we approve infinity both on token and massetContract, still need TBD when/how we approve to optimize gas
  function approveOnce(address token) external {
       
       address massetContract = markets[token];
