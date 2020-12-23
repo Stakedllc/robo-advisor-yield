@@ -14,7 +14,7 @@ import { IMasset } from "./interfaces/IMasset.sol";
 import { ISavingsContract } from "./interfaces/ISavingsContract.sol";
 import { IMStableHelper } from './interfaces/IMStableHelper.sol';
 // import IERC20 from ''
-contract MStableOpportunity is IOpportunity, Initializable {
+contract MStableOpportunityDAI is IOpportunity, Initializable {
   using SafeERC20 for IERC20;
   using SafeMath for uint;
 
@@ -105,7 +105,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
  
  
 
-   uint256 public _amount;   
+      
  
   function supply(address token, uint amount, bool isERC20) external payable {
    //  address compoundMarket = markets[principalToken];
@@ -129,8 +129,6 @@ contract MStableOpportunity is IOpportunity, Initializable {
 
   }
 
-  uint256 public value;
-  uint256 public creditsToRedeem;
 
   /// @notice  Withdraw assets to the underlying Opportunity
   ///
@@ -149,16 +147,15 @@ contract MStableOpportunity is IOpportunity, Initializable {
        
         // get back mUSD asset from savings contract
         uint256 _bAssetQuantity = savingsContract.redeem(creditsToRedeem);
-        uint256 _bAssetQuantityNew = _bAssetQuantity.mul(1e12);
-       // redeem mUSD for USDC 
-        IMasset(massetContract).redeemTo(token, _bAssetQuantityNew, beneficiary);
       
+       // redeem mUSD for DAI 
+        uint256 value = IMasset(massetContract).redeemTo(token, _bAssetQuantity,beneficiary);
         
   
   }
 
 // TO APPROVE OUT OF THE CONTRACT 
-// we approve infinity both on token and massetContract, still need TBD when we approve
+// we approve infinity both on token and massetContract, will be approved after before starting
  function approveOnce(address token) external {
       
       address massetContract = markets[token];

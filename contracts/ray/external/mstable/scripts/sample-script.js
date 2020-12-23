@@ -5,6 +5,15 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 require('dotenv').config()
+
+
+
+const ether = (n) => {
+  return ethers.utils.parseEther(n.toString());
+};
+
+const tokens = (n) => ether(n);
+
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
@@ -12,7 +21,7 @@ async function main() {
   // If this script is run directly using `node` you may want to call compile 
   // manually to make sure everything is compiled
   // await hre.run('compile');
-  const MStable = await ethers.getContractFactory("MStableOpportunity");
+  const MStable = await ethers.getContractFactory("MStableOpportunityDAI");
   const mStable = await MStable.deploy();
   
   await mStable.deployed();
@@ -39,19 +48,47 @@ async function main() {
 
    const storageRayMockUp = '0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810'
 
-   const tusdKovan = '0x13512979ade267ab5100878e2e0f485b568328a4'
+  const tusdKovan = '0x13512979ade267ab5100878e2e0f485b568328a4'
+ 
+   const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
+   const USDC = '0xb7a4f3e9097c08da09517b5ab877f7a917224ede'
 
+   const mUSDContract = new ethers.Contract(mUSD, ERC20Abi, provider);
+  const mUSDSigned = mUSDContract.connect(deployer);
   
   const opportunityContract = new ethers.Contract(mStable.address,OpportunityAbi,provider)
   
   const opportunity = opportunityContract.connect(deployer)
 
-  const result = await opportunity.initialize(storageRayMockUp,[tusdKovan],[proxy],saveAddress,helperAddress,mUSD)
-  const receipt = await result.wait()
+
+
+  let result = await opportunity.initialize(storageRayMockUp,[DAI],[proxy],saveAddress,helperAddress,mUSD)
+  let receipt = await result.wait()
   console.log(receipt)
   //expect(mStable.address);
   
+  result = await mUSDSigned.approve(proxy, tokens(9900));
+  console.log(result);
+  receipt = await result.wait();
+  console.log(receipt);
+
+  result = await mUSDSigned.approve(saveAddress, tokens(9990));
+
+  receipt = await result.wait();
+  console.log(receipt);
+
+      // for testing purpose i created a new function which we will eventually take out
+  result = await opportunity.approveOnce(DAI, options);
+  console.log(result);
+  receipt = await result.wait();
+  console.log(receipt);
   
+  
+  
+  result = await mUSDSigned.approve(mStable.address, tokens(9990));
+
+    receipt = await result.wait();
+    console.log(receipt);
  
   // We get the contract to deploy
   
@@ -75,6 +112,21 @@ main()
       "payable": true,
       "stateMutability": "payable",
       "type": "fallback"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "_amount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     },
     {
       "constant": false,
@@ -294,6 +346,21 @@ main()
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "value",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -324,3 +391,202 @@ main()
       "type": "function"
     }
   ]
+
+
+const ERC20Abi =  [
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "owner",
+          type: "address",
+        },
+        {
+          indexed: true,
+          internalType: "address",
+          name: "spender",
+          type: "address",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "Approval",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "address",
+          name: "from",
+          type: "address",
+        },
+        {
+          indexed: true,
+          internalType: "address",
+          name: "to",
+          type: "address",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "Transfer",
+      type: "event",
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "owner",
+          type: "address",
+        },
+        {
+          internalType: "address",
+          name: "spender",
+          type: "address",
+        },
+      ],
+      name: "allowance",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "address",
+          name: "spender",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "approve",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [
+        {
+          internalType: "address",
+          name: "who",
+          type: "address",
+        },
+      ],
+      name: "balanceOf",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: "totalSupply",
+      outputs: [
+        {
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
+      ],
+      payable: false,
+      stateMutability: "view",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "address",
+          name: "to",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "transfer",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      constant: false,
+      inputs: [
+        {
+          internalType: "address",
+          name: "from",
+          type: "address",
+        },
+        {
+          internalType: "address",
+          name: "to",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "value",
+          type: "uint256",
+        },
+      ],
+      name: "transferFrom",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool",
+        },
+      ],
+      payable: false,
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+  ];

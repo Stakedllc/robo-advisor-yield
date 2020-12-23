@@ -42,9 +42,13 @@ const init = async () => {
 
   const storageRayMockUp = "0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810";
 
-  const tusdKovan = "0x13512979ade267ab5100878e2e0f485b568328a4";
-
-  const opportunityAddress = "0x9601092E1773604884f4d4e5cCD2d66225d6fa01";
+  const tusdKovan = "0xe22da380ee6B445bb8273C81944ADEB6E8450422";
+  
+  const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
+ 
+ const opportunityAddress = '0xB59c10Aa82CC91357411a246a5f28d78A7161e73'
+  const oldOpportunityAddress = '0xa40c73a7ab1CD1BaDa95667fDBc62D0e443DA98A';
+  
   const opportunityContract = new ethers.Contract(
     opportunityAddress,
     OpportunityEXTRA,
@@ -64,8 +68,8 @@ const init = async () => {
   const proxyContract = new ethers.Contract(proxy, ProxyAbi, provider);
   const proxySigned = proxyContract.connect(deployer);
 
-  const usdTContract = new ethers.Contract(tusdKovan, USDTAbi, provider);
-  const usdTSigned = usdTContract.connect(deployer);
+  const daiContract = new ethers.Contract(DAI, ERC20Abi, provider);
+  const DAISigned = daiContract.connect(deployer);
 
   const massetProxyContract = new ethers.Contract(proxy, MassetAbi, provider);
   const massetProxySigned = massetProxyContract.connect(deployer);
@@ -82,16 +86,12 @@ const init = async () => {
   let result;
   let receipt;
 
-  // OPPORTUNITY INITIALIZER
-  //  result = await opportunity.initialize(storageRayMockUp,[usdcKovan],[mAsset],saveAddress,helperAddress)
-  //  receipt = await result.wait()
 
-  //    console.log(receipt)
+
   // result = await helperSigned.suggestMintAsset(tusdKovan, options)
 
-  //console.log(result)
   // check masset address
-  result = await opportunity.markets(tusdKovan);
+  result = await opportunity.markets(DAI);
 
   console.log(result, "proxy");
 
@@ -107,9 +107,9 @@ const init = async () => {
 
   console.log(result, "basket contract");
 
-    // APPROVE usdT for mAsset
-  result = await usdTSigned.approve(proxy,tokens(9990), options)
-  console.log(result)
+  // APPROVE usdT for mAsset
+  // result = await usdTSigned.approve(proxy,tokens(9990), options)
+  // console.log(result)
 
   result = await massetProxySigned.balanceOf(
     "0x519f11CDD52bbbDC865c72A6549EA67429C22991"
@@ -123,86 +123,76 @@ const init = async () => {
 
   // UNCOMMENT TO RUN IT
 
-  // result = await usdTSigned.approve(proxy, tokens(9990))
+  // result = await DAISigned.approve(proxy, tokens(9990))
   //  receipt = await result.wait()
   // console.log(receipt)
 
-  //   result = await massetProxySigned.mint(tusdKovan, 1000,options)
+  //   result = await massetProxySigned.mint(DAI, 1000,options)
   //  receipt = await result.wait()
   //  console.log(result)
 
-  // // // APPROVE   user allows savingContracts to move mUSD minted before
+  // APPROVE   user allows savingContracts to move mUSD minted before
   //   result = await mUSDSigned.approve(saveAddress, tokens(9990))
 
   //  receipt = await result.wait()
   // console.log(receipt)
 
-  //   result = await saveSigned.depositSavings(1000, options)
-  //   receipt = await result.wait()
-  //   console.log(result)
+    // result = await saveSigned.depositSavings(1000, options)
+    // receipt = await result.wait()
+    // console.log(result)
 
   // // WITHDRAW MANUALLY
 
-  // GET AMOUNT TO REDEEM AND REDEEMS FROM SAVINGS TO GET MUSD
+  // // GET AMOUNT TO REDEEM AND REDEEMS FROM SAVINGS TO GET MUSD
   // result = await helperSigned.getSaveRedeemInput(saveAddress,1000, options)
   // console.log(result.toString())
 
   // result = await saveSigned.redeem(result, options)
-  //     receipt = await result.wait()
+  // console.log(result)    
+  // receipt = await result.wait()
+
   //   console.log(receipt)
 
-  //   // REDEEM mUSD to get back USDT
+  //   // REDEEM mUSD to get back DAI
 
-  //   result = await massetProxySigned.redeem(tusdKovan,1000, options)
-  //   receipt = await result.wait()
-  //   console.log(result)
+    // result = await massetProxySigned.redeem(DAI,1000, options)
+    // receipt = await result.wait()
+    // console.log(result)
 
   // TRY TO DEPOSIT USING OPPORTUNITY, Works fine to test
 
   try {
-    result = await mUSDSigned.approve(proxy, tokens(9900));
+
+    // UNCOMMENT WHEN FIRST TIME DEPLOYING
+
+    // result = await DAISigned.approve(opportunityAddress, tokens(9990));
+    // receipt = await result.wait();
+    // console.log(receipt);
+
+    result = await opportunity.supply(DAI, ethers.utils.parseEther('10'), true, options);
     console.log(result);
     receipt = await result.wait();
     console.log(receipt);
 
-    result = await mUSDSigned.approve(saveAddress, tokens(9990));
-
-    receipt = await result.wait();
-    console.log(receipt);
-
-    // for testing purpose i created a new function which we will eventually take out
-    result = await opportunity.approveOnce(tusdKovan, options);
-    console.log(result);
-    receipt = await result.wait();
-    console.log(receipt);
-    result = await usdTSigned.approve(opportunityAddress, tokens(9990));
-
-    receipt = await result.wait();
-    console.log(receipt);
-
-    result = await opportunity.supply(tusdKovan, 100, true, options);
-    console.log(result);
-    receipt = await result.wait();
-    console.log(receipt);
-
-    result = await mUSDSigned.approve(opportunityAddress, tokens(9990));
-
-    receipt = await result.wait();
-    console.log(receipt);
+    
 
     result = await opportunity.withdraw(
-      tusdKovan,
-      "0xBf2869E5D6133A064305317bbe287446f1A549Ae",
-      100,
+      DAI,
+      "0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810",
+      ethers.utils.parseEther('9.999999999999999999'),
+      
       true,
       options
     );
     receipt = await result.wait();
     console.log(receipt);
+
+ 
+    
   } catch (err) {
     console.log(err);
   }
-};
+ };
 
 init();
 
@@ -2496,4 +2486,4 @@ const OpportunityEXTRA = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
+]
