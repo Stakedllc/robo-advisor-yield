@@ -21,7 +21,10 @@ async function main() {
   // If this script is run directly using `node` you may want to call compile 
   // manually to make sure everything is compiled
   // await hre.run('compile');
-  const MStable = await ethers.getContractFactory("MStableOpportunityDAI");
+
+
+  // use  MStableOpportunity for USDC or MStableOpportunityDAI for DAI
+  const MStable = await ethers.getContractFactory("MStableOpportunity");
   const mStable = await MStable.deploy();
   
   await mStable.deployed();
@@ -61,8 +64,8 @@ async function main() {
   const opportunity = opportunityContract.connect(deployer)
 
 
-
-  let result = await opportunity.initialize(storageRayMockUp,[DAI],[proxy],saveAddress,helperAddress,mUSD)
+      // use USDC or DAI address
+  let result = await opportunity.initialize(storageRayMockUp,[USDC],[proxy],saveAddress,helperAddress,mUSD)
   let receipt = await result.wait()
   console.log(receipt)
   //expect(mStable.address);
@@ -78,7 +81,8 @@ async function main() {
   console.log(receipt);
 
       // for testing purpose i created a new function which we will eventually take out
-  result = await opportunity.approveOnce(DAI, options);
+      // use USDC or DAI address
+  result = await opportunity.approveOnce(USDC, options);
   console.log(result);
   receipt = await result.wait();
   console.log(receipt);

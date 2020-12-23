@@ -149,7 +149,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
        
         // get back mUSD asset from savings contract
         uint256 _bAssetQuantity = savingsContract.redeem(creditsToRedeem);
-        uint256 _bAssetQuantityNew = _bAssetQuantity.mul(1e12);
+        uint256 _bAssetQuantityNew = _bAssetQuantity.div(1e12);
        // redeem mUSD for USDC 
         IMasset(massetContract).redeemTo(token, _bAssetQuantityNew, beneficiary);
       

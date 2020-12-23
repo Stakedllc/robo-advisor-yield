@@ -49,7 +49,7 @@ const init = async () => {
 
   //const tusdKovan = "0xe22da380ee6B445bb8273C81944ADEB6E8450422";
   const USDC = '0xb7a4f3e9097c08da09517b5ab877f7a917224ede'
-  const opportunityAddress = '0xa0990fEce4A76e51B41d988e4a7D050516328543';
+  const opportunityAddress = '0x1CD590f88372eF7a15Ca41CaC58B8645ae5b9d8F';
   
   const opportunityContract = new ethers.Contract(
     opportunityAddress,
@@ -70,8 +70,8 @@ const init = async () => {
   const proxyContract = new ethers.Contract(proxy, ProxyAbi, provider);
   const proxySigned = proxyContract.connect(deployer);
 
-  const usdTContract = new ethers.Contract(USDC, USDTAbi, provider);
-  const usdTSigned = usdTContract.connect(deployer);
+  const USDCContract = new ethers.Contract(USDC, USDTAbi, provider);
+  const USDCSigned = USDCContract.connect(deployer);
 
   const massetProxyContract = new ethers.Contract(proxy, MassetAbi, provider);
   const massetProxySigned = massetProxyContract.connect(deployer);
@@ -166,51 +166,42 @@ const init = async () => {
   // TRY TO DEPOSIT USING OPPORTUNITY, Works fine to test
 
   try {
-    // result = await mUSDSigned.approve(proxy, tokens(9900));
-    // console.log(result);
-    // receipt = await result.wait();
-    // console.log(receipt);
+   
 
-    // result = await mUSDSigned.approve(saveAddress, tokens(9990));
 
-    // receipt = await result.wait();
-    // console.log(receipt);
 
-    // // for testing purpose i created a new function which we will eventually take out
-    // result = await opportunity.approveOnce(USDC, options);
-    // console.log(result);
-    // receipt = await result.wait();
-    // console.log(receipt);
-    // result = await usdTSigned.approve(opportunityAddress, tokens(9990));
+    result = await USDCSigned.approve(opportunityAddress, tokens(9990));
 
-    // receipt = await result.wait();
-    // console.log(receipt);
-    // result = await opportunity._amount()
-    // console.log(result.toString())
+    receipt = await result.wait();
+    console.log(receipt);
+
+
+
+   
 
     result = await opportunity.supply(USDC, 10000, true, options);
     console.log(result);
     receipt = await result.wait();
     console.log(receipt);
 
-    // result = await opportunity._amount()
-    // console.log(result.toString())
-    // result = await mUSDSigned.approve(opportunityAddress, tokens(9990));
-    // receipt = await result.wait();
-    // console.log(receipt);
-
+ 
+ 
 
 
     
     result = await opportunity.withdraw(
       USDC,
       "0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810",
-      100,
+     ethers.utils.parseEther('0.009999999999999999'),
+     //ethers.utils.parseEther('0.01'),
       true,
       options
     );
     receipt = await result.wait();
     console.log(receipt);
+
+
+
   } catch (err) {
     console.log(err);
     }
