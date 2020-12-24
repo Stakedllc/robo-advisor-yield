@@ -55,6 +55,7 @@ async function main() {
  
    const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
    const USDC = '0xb7a4f3e9097c08da09517b5ab877f7a917224ede'
+   const TUSD = '0x1c4a937d171752e1313d70fb16ae2ea02f86303e'
 
    const mUSDContract = new ethers.Contract(mUSD, ERC20Abi, provider);
   const mUSDSigned = mUSDContract.connect(deployer);
@@ -65,7 +66,7 @@ async function main() {
 
 
       // use USDC or DAI address
-  let result = await opportunity.initialize(storageRayMockUp,[DAI],[proxy],saveAddress,helperAddress,mUSD)
+  let result = await opportunity.initialize(storageRayMockUp,[TUSD],[proxy],saveAddress,helperAddress,mUSD)
   let receipt = await result.wait()
   console.log(receipt)
   //expect(mStable.address);
@@ -82,7 +83,7 @@ async function main() {
 
       // for testing purpose i created a new function which we will eventually take out
       // use USDC or DAI address
-  result = await opportunity.approveOnce(DAI, options);
+  result = await opportunity.approveOnce(TUSD, options);
   console.log(result);
   receipt = await result.wait();
   console.log(receipt);
