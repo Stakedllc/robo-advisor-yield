@@ -46,12 +46,12 @@ const init = async () => {
   
   const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
  
- const opportunityAddress = '0xB59c10Aa82CC91357411a246a5f28d78A7161e73'
-  const oldOpportunityAddress = '0xa40c73a7ab1CD1BaDa95667fDBc62D0e443DA98A';
+ const opportunityAddress = '0x654FBFcA401F157e29E421c5b42215Eef6f2Cabd'
+ 
   
   const opportunityContract = new ethers.Contract(
     opportunityAddress,
-    OpportunityEXTRA,
+    OpportunityAbi,
     provider
   );
 
@@ -164,30 +164,32 @@ const init = async () => {
   try {
 
     // UNCOMMENT WHEN FIRST TIME DEPLOYING
+   
 
-    // result = await DAISigned.approve(opportunityAddress, tokens(9990));
-    // receipt = await result.wait();
-    // console.log(receipt);
+    result = await DAISigned.approve(opportunityAddress, tokens(9990));
+    receipt = await result.wait();
+    console.log(receipt);
 
     result = await opportunity.supply(DAI, ethers.utils.parseEther('10'), true, options);
     console.log(result);
     receipt = await result.wait();
     console.log(receipt);
 
-    
+    balanceAvailable = await opportunity.getBalance(DAI)
+    console.log(balanceAvailable.toString(),'mUSD balance in wei')
 
     result = await opportunity.withdraw(
       DAI,
       "0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810",
-      ethers.utils.parseEther('9.999999999999999999'),
-      
+      balanceAvailable,
       true,
       options
     );
     receipt = await result.wait();
     console.log(receipt);
 
- 
+    balanceAvailable = await opportunity.getBalance(DAI)
+    console.log(balanceAvailable.toString(),'mUSD balance in wei')
     
   } catch (err) {
     console.log(err);
@@ -200,258 +202,258 @@ init();
 
 const OpportunityAbi = [
   {
-    payable: true,
-    stateMutability: "payable",
-    type: "fallback",
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "address[]",
-        name: "principalTokens",
-        type: "address[]",
+        "internalType": "address[]",
+        "name": "principalTokens",
+        "type": "address[]"
       },
       {
-        internalType: "address[]",
-        name: "otherContracts",
-        type: "address[]",
-      },
+        "internalType": "address[]",
+        "name": "otherContracts",
+        "type": "address[]"
+      }
     ],
-    name: "addPrincipalTokens",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "addPrincipalTokens",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
     ],
-    name: "approveOnce",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "approveOnce",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
     ],
-    name: "getBalance",
-    outputs: [
+    "name": "getBalance",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "helper",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "helper",
+    "outputs": [
       {
-        internalType: "contract IMStableHelper",
-        name: "",
-        type: "address",
-      },
+        "internalType": "contract IMStableHelper",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "address",
-        name: "storage_contract",
-        type: "address",
+        "internalType": "address",
+        "name": "storage_contract",
+        "type": "address"
       },
       {
-        internalType: "address[]",
-        name: "principalToken",
-        type: "address[]",
+        "internalType": "address[]",
+        "name": "principalToken",
+        "type": "address[]"
       },
       {
-        internalType: "address[]",
-        name: "otherToken",
-        type: "address[]",
+        "internalType": "address[]",
+        "name": "otherToken",
+        "type": "address[]"
       },
       {
-        internalType: "address",
-        name: "_savingsContract",
-        type: "address",
+        "internalType": "address",
+        "name": "_savingsContract",
+        "type": "address"
       },
       {
-        internalType: "address",
-        name: "_mStableHelper",
-        type: "address",
+        "internalType": "address",
+        "name": "_mStableHelper",
+        "type": "address"
       },
       {
-        internalType: "address",
-        name: "_mUSD",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "_mUSD",
+        "type": "address"
+      }
     ],
-    name: "initialize",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "mUSD",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "mUSD",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: "markets",
-    outputs: [
+    "name": "markets",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "rayStorage",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "rayStorage",
+    "outputs": [
       {
-        internalType: "contract IStorage",
-        name: "",
-        type: "address",
-      },
+        "internalType": "contract IStorage",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "saveAddress",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "saveAddress",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "savingsContract",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "savingsContract",
+    "outputs": [
       {
-        internalType: "contract ISavingsContract",
-        name: "",
-        type: "address",
-      },
+        "internalType": "contract ISavingsContract",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "bool",
-        name: "isERC20",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "isERC20",
+        "type": "bool"
+      }
     ],
-    name: "supply",
-    outputs: [],
-    payable: true,
-    stateMutability: "payable",
-    type: "function",
+    "name": "supply",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
-        internalType: "address",
-        name: "beneficiary",
-        type: "address",
+        "internalType": "address",
+        "name": "beneficiary",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "bool",
-        name: "isERC20",
-        type: "bool",
-      },
+        "internalType": "bool",
+        "name": "isERC20",
+        "type": "bool"
+      }
     ],
-    name: "withdraw",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-];
+    "name": "withdraw",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
 
 const ProxyAbi = [
   {

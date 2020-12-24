@@ -52,6 +52,6 @@ interface IOpportunity {
   /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
   ///
   /// @param   tokenAddress - address of the token to get the balance of
-  function getBalance(address tokenAddress) external returns (uint);
+  function getBalance(address tokenAddress) external view returns (uint);
 
 }

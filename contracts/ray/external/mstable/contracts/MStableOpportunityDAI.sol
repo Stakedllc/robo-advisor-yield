@@ -168,8 +168,11 @@ contract MStableOpportunityDAI is IOpportunity, Initializable {
   /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
   ///
   /// @param   token - address of the token to get the balance of
-  function getBalance(address token) external returns (uint){
-    
+  function getBalance(address token) external view returns (uint){
+      
+      uint256 balance = helper.getSaveBalance(savingsContract,address(this));
+      return balance;
+      
   }
 
 

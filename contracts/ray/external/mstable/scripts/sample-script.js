@@ -24,7 +24,7 @@ async function main() {
 
 
   // use  MStableOpportunity for USDC or MStableOpportunityDAI for DAI
-  const MStable = await ethers.getContractFactory("MStableOpportunity");
+  const MStable = await ethers.getContractFactory("MStableOpportunityDAI");
   const mStable = await MStable.deploy();
   
   await mStable.deployed();
@@ -65,7 +65,7 @@ async function main() {
 
 
       // use USDC or DAI address
-  let result = await opportunity.initialize(storageRayMockUp,[USDC],[proxy],saveAddress,helperAddress,mUSD)
+  let result = await opportunity.initialize(storageRayMockUp,[DAI],[proxy],saveAddress,helperAddress,mUSD)
   let receipt = await result.wait()
   console.log(receipt)
   //expect(mStable.address);
@@ -82,7 +82,7 @@ async function main() {
 
       // for testing purpose i created a new function which we will eventually take out
       // use USDC or DAI address
-  result = await opportunity.approveOnce(USDC, options);
+  result = await opportunity.approveOnce(DAI, options);
   console.log(result);
   receipt = await result.wait();
   console.log(receipt);
