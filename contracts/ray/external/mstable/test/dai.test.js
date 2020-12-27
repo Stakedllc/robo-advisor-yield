@@ -46,7 +46,7 @@ const init = async () => {
   
   const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
  
- const opportunityAddress = '0x654FBFcA401F157e29E421c5b42215Eef6f2Cabd'
+ const opportunityAddress = '0x175F956bF97969b75c1655102DeFCFA0dd51eDE8'
  
   
   const opportunityContract = new ethers.Contract(

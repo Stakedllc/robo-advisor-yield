@@ -14,7 +14,7 @@ import { IMasset } from "./interfaces/IMasset.sol";
 import { ISavingsContract } from "./interfaces/ISavingsContract.sol";
 import { IMStableHelper } from './interfaces/IMStableHelper.sol';
 // import IERC20 from ''
-contract MStableOpportunity is IOpportunity, Initializable {
+contract MStableOpportunityAll is IOpportunity, Initializable {
   using SafeERC20 for IERC20;
   using SafeMath for uint;
 
@@ -129,7 +129,7 @@ contract MStableOpportunity is IOpportunity, Initializable {
 
   }
 
-
+  
 
   /// @notice  Withdraw assets to the underlying Opportunity
   ///
@@ -137,7 +137,8 @@ contract MStableOpportunity is IOpportunity, Initializable {
   ///                           case of ETH
   /// @param   beneficiary - address to send the token too
   /// @param   amount - amount in the smallest unit of the token to supply
-  /// @param   isERC20 - boolean if the token follows the ERC20 standard
+  /// @param   isERC20 - boolean if the token follows the ERC20 standard, 
+  // in this opportunity isERC20 is true for 18 decimals token(DAI,TUSD), false for 6 decimals token (USDT,USDC)
 
   function withdraw(address token, address beneficiary, uint amount, bool isERC20) external {
         
@@ -148,24 +149,38 @@ contract MStableOpportunity is IOpportunity, Initializable {
        
         // get back mUSD asset from savings contract
         uint256 _bAssetQuantity = savingsContract.redeem(creditsToRedeem);
-        uint256 _bAssetQuantityNew = _bAssetQuantity.div(1e12);
+       
+        uint256 _bAssetQuantityFormat;
+
+       if (isERC20) {
+
+          _bAssetQuantityFormat = _bAssetQuantity;
+
+       } else { _bAssetQuantityFormat = _bAssetQuantity.div(1e12); }
+
        // redeem mUSD for USDC 
-        IMasset(massetContract).redeemTo(token, _bAssetQuantityNew, beneficiary);
+        IMasset(massetContract).redeemTo(token, _bAssetQuantityFormat, beneficiary);
       
         
   
   }
 
 // TO APPROVE OUT OF THE CONTRACT 
-// we approve infinity both on token and massetContract, still need TBD when we approve
+// we approve infinity both on token and massetContract, eventually this will be removed an approval will be done from the script
  function approveOnce(address token) external {
       
       address massetContract = markets[token];
-      IERC20(token).safeApprove(massetContract, uint256(-1));
+      
       IERC20(massetContract).safeApprove(saveAddress, uint256(-1));
     
 
  }
+
+function approveEach(address token) external {
+        address massetContract = markets[token];
+        IERC20(token).safeApprove(massetContract, uint256(-1));  // already set in the script
+}
+ 
 
   /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
   ///

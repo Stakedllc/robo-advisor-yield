@@ -24,7 +24,7 @@ async function main() {
 
 
   // use  MStableOpportunity for USDC or MStableOpportunityDAI for DAI
-  const MStable = await ethers.getContractFactory("MStableOpportunityDAI");
+  const MStable = await ethers.getContractFactory("MStableOpportunityAll");
   const mStable = await MStable.deploy();
   
   await mStable.deployed();
@@ -64,9 +64,17 @@ async function main() {
   
   const opportunity = opportunityContract.connect(deployer)
 
+  const USDCContract = new ethers.Contract(USDC, ERC20Abi, provider);
+  const USDCSigned = USDCContract.connect(deployer);
+
+  const daiContract = new ethers.Contract(DAI, ERC20Abi, provider);
+  const DAISigned = daiContract.connect(deployer);
+
+  const tusdContract = new ethers.Contract(TUSD, ERC20Abi, provider);
+  const TUSDSigned = tusdContract.connect(deployer);
 
       // use USDC or DAI address
-  let result = await opportunity.initialize(storageRayMockUp,[TUSD],[proxy],saveAddress,helperAddress,mUSD)
+  let result = await opportunity.initialize(storageRayMockUp,[DAI,TUSD,USDC],[proxy, proxy, proxy],saveAddress,helperAddress,mUSD)
   let receipt = await result.wait()
   console.log(receipt)
   //expect(mStable.address);
@@ -83,16 +91,55 @@ async function main() {
 
       // for testing purpose i created a new function which we will eventually take out
       // use USDC or DAI address
-  result = await opportunity.approveOnce(TUSD, options);
+  // result = await opportunity.approveOnce(TUSD, options);
+  // console.log(result);
+  // receipt = await result.wait();
+  // console.log(receipt);
+  
+  // result = await opportunity.approveOnce(USDC, options);
+  // console.log(result);
+  // receipt = await result.wait();
+  // console.log(receipt);
+  
+  result = await opportunity.approveOnce(DAI, options); // we used dai but could be anyone since all refer to proxy
   console.log(result);
   receipt = await result.wait();
   console.log(receipt);
-  
-  
+
+  result = await opportunity.approveEach(DAI, options); // we used dai but could be anyone since all refer to proxy
+  console.log(result);
+  receipt = await result.wait();
+  console.log(receipt);
+
+  result = await opportunity.approveEach(TUSD, options); // we used dai but could be anyone since all refer to proxy
+  console.log(result);
+  receipt = await result.wait();
+  console.log(receipt);
+
+  result = await opportunity.approveEach(USDC, options); // we used dai but could be anyone since all refer to proxy
+  console.log(result);
+  receipt = await result.wait();
+  console.log(receipt);
+
+
+  // this is the step we commented out from approveOnce
+  // result = await DAISigned.safeApprove(proxy, tokens(100000), options);
+  // console.log(result);
+  // receipt = await result.wait();
+  // console.log(receipt);
+
+  // result = await USDCSigned.safeApprove(proxy, tokens(100000), options);
+  // console.log(result);
+  // receipt = await result.wait();
+  // console.log(receipt);
+
+  // result = await TUSDSigned.safeApprove(proxy,tokens(100000), options);
+  // console.log(result);
+  // receipt = await result.wait();
+  // console.log(receipt);
   
   result = await mUSDSigned.approve(mStable.address, tokens(9990));
-
-    receipt = await result.wait();
+  receipt = await result.wait();
     console.log(receipt);
  
   // We get the contract to deploy
@@ -162,7 +209,7 @@ main()
           "type": "address"
         }
       ],
-      "name": "approveOnce",
+      "name": "approveEach",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -170,6 +217,21 @@ main()
     },
     {
       "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "approveOnce",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
       "inputs": [
         {
           "internalType": "address",
@@ -186,7 +248,7 @@ main()
         }
       ],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -348,21 +410,6 @@ main()
       "outputs": [],
       "payable": true,
       "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "value",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
       "type": "function"
     },
     {
