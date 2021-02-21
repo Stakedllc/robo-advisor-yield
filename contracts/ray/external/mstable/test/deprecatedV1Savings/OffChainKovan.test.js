@@ -1,3 +1,4 @@
+// FOR SAVINGS V1 - DEPRECATED
 
 const { ethers } = require("ethers");
 
@@ -12,12 +13,12 @@ const tokens = (n) => ether(n);
 const fromWei = (n) => {
   return ethers.utils.formatEther(n);
 };
-// const ETHER_ADDRESS= '0x0000000000000000000000000000000000000000'
-// const EVM_REVERT ='VM Exception while processing transaction: revert'
+
 
 let result;
 
 const init = async () => {
+
   const provider = ethers.getDefaultProvider("kovan", {
     infura: process.env.INFURA_KEY_KOVAN,
   });
@@ -27,8 +28,7 @@ const init = async () => {
     process.env.PRIVATE_KEY
   );
 
-  //  const test = new ethers.Wallet.createRandom()
-  //  console.log(test)
+
   const deployer = await signer.connect(provider);
 
   console.log("Deployer Address", deployer.address); // 0x3Cc7245E020C98d289908730B8Cf6Ad279b77A12
@@ -37,7 +37,7 @@ const init = async () => {
 
   const saveAddress = "0x54Ac0bdf4292F7565Af13C9FBEf214eEEB2d0F87";
   const proxy = "0x70605bdd16e52c86fc7031446d995cf5c7e1b0e7";
-  // ropsten proxy 0x4E1000616990D83e56f4b5fC6CC8602DcfD20459
+  
   const mAsset = "0x4534042F31acDB0c84AB04365d529C088f35359A"; // kovan mAsset
   const mUSD = "0x70605Bdd16e52c86FC7031446D995Cf5c7E1b0e7";
 
@@ -79,22 +79,17 @@ const init = async () => {
   
   const saveContract = new ethers.Contract(saveAddress, SaveAbi, provider);
   const saveSigned = saveContract.connect(deployer);
-  //console.log(saveSigned)
-  //const prova = await saveSigned.totalSavings()
+
 
 
   const mUSDContract = new ethers.Contract(mUSD, ERC20Abi, provider);
   const mUSDSigned = mUSDContract.connect(deployer);
-  // console.log(mAssetSigned)
-  //console.log(helperContract)
+  
   const opportunity = opportunityContract.connect(deployer);
 
   let result;
   let receipt;
 
-
-
-  // result = await helperSigned.suggestMintAsset(tusdKovan, options)
 
   // check masset address
   result = await opportunity.markets(DAI);
@@ -112,7 +107,6 @@ const init = async () => {
   const basketContract = new ethers.Contract(result, BasketManagerAbi, provider);
   const basketSigned = basketContract.connect(deployer);
   
-    console.log(basketSigned)
   console.log(result, "basket contract");
 
   // APPROVE usdT for mAsset
@@ -130,37 +124,7 @@ const init = async () => {
  
   try {
 
-    // UNCOMMENT WHEN FIRST TIME DEPLOYING
-   
-
-    // result = await DAISigned.approve(opportunityAddress, tokens(9990));
-    // receipt = await result.wait();
-    // console.log(receipt);
-
-    // result = await opportunity.supply(DAI, ethers.utils.parseEther('1'), true, options);
-    // console.log(result);
-    // receipt = await result.wait();
-    // console.log(receipt);
-
   
-
-    // balanceAvailable = await opportunity.getBalance(DAI)
-    // console.log(balanceAvailable.toString(),'mUSD balance in wei')
-
-    // result = await opportunity.withdraw(
-    //   DAI,
-    //   "0x948d3D9900bC9C428F5c69dccf6b7Ea24fb6b810",
-    //   balanceAvailable,
-    //   true,
-    //   options
-    // );
-    // receipt = await result.wait();
-    // console.log(receipt);
-
-    // balanceAvailable = await opportunity.getBalance(DAI)
-    // console.log(balanceAvailable.toString(),'mUSD balance in wei')
-
-
 
   const getSupply = async(bAsset) => {
     saveBalance = await helperSigned.getSaveBalance(saveAddress,opportunityAddress)

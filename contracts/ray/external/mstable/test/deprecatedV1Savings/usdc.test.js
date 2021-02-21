@@ -49,7 +49,7 @@ const init = async () => {
 
   //const tusdKovan = "0xe22da380ee6B445bb8273C81944ADEB6E8450422";
   const USDC = '0xb7a4f3e9097c08da09517b5ab877f7a917224ede'
-  const opportunityAddress = '0x175F956bF97969b75c1655102DeFCFA0dd51eDE8';
+  const opportunityAddress = '0x53B63C6a5da9269921D86d94D911A72a5d25e3F7';
   
   const opportunityContract = new ethers.Contract(
     opportunityAddress,
@@ -70,7 +70,7 @@ const init = async () => {
   const proxyContract = new ethers.Contract(proxy, ProxyAbi, provider);
   const proxySigned = proxyContract.connect(deployer);
 
-  const USDCContract = new ethers.Contract(USDC, USDTAbi, provider);
+  const USDCContract = new ethers.Contract(USDC, ERC20Abi, provider);
   const USDCSigned = USDCContract.connect(deployer);
 
   const massetProxyContract = new ethers.Contract(proxy, MassetAbi, provider);
@@ -184,6 +184,8 @@ const init = async () => {
     receipt = await result.wait();
     console.log(receipt);
 
+    getSupply = await opportunity.getSupply(USDC) 
+    console.log(getSupply[1].toString(),getSupply[2].toString())
  
     balanceAvailable = await opportunity.getBalance(USDC)
     console.log(balanceAvailable.toString(), 'mUSD balance in wei')
@@ -223,21 +225,6 @@ const OpportunityAbi = [
     "type": "fallback"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "_amount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -252,6 +239,21 @@ const OpportunityAbi = [
       }
     ],
     "name": "addPrincipalTokens",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "approveEach",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -283,6 +285,52 @@ const OpportunityAbi = [
     ],
     "name": "getBalance",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getSupply",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "",

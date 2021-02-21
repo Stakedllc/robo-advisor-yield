@@ -8,7 +8,7 @@ import { IStorage } from "./interfaces/IStorage.sol";
 import "./openzeppelin/SafeERC20.sol";
 import "./openzeppelin/SafeMath.sol";
 // Remove hardhat/console.sol for production
-// import "hardhat/console.sol";
+import "hardhat/console.sol";
 
 import { IMasset } from "./interfaces/IMasset.sol";
 import { ISavingsContract } from "./interfaces/ISavingsContract.sol";
@@ -32,6 +32,7 @@ contract MStableOpportunityAll is IOpportunity, Initializable {
   address public saveAddress;
   IMStableHelper public helper;
   address public mUSD;
+  
   // NOTE: Mapping can be changed to a struct or any other data structure needed
   // Ex:
   // 
@@ -105,7 +106,7 @@ contract MStableOpportunityAll is IOpportunity, Initializable {
  
  
 
-   uint256 public _amount;   
+
  
   function supply(address token, uint amount, bool isERC20) external payable {
    //  address compoundMarket = markets[principalToken];
@@ -117,11 +118,11 @@ contract MStableOpportunityAll is IOpportunity, Initializable {
 
       // mint new mUSD to deposit into savings contract
         uint256 _amount = IMasset(massetContract).mint(token, amount);
-          
+          console.log(_amount, 'amount in mUSD deposited into the contract');
       // deposit to savings
-        savingsContract.depositSavings(_amount);
+       uint256 creditIssued = savingsContract.depositSavings(_amount);
 
-
+            console.log(creditIssued, 'creditIssued');
        
 
 
@@ -165,8 +166,8 @@ contract MStableOpportunityAll is IOpportunity, Initializable {
   
   }
 
-// TO APPROVE OUT OF THE CONTRACT 
-// we approve infinity both on token and massetContract, eventually this will be removed an approval will be done from the script
+// APPROVE AFTER INITIALIZING BUT BEFORE SUPPLYING TOKENS
+// we approve infinity allowance from opportunity contract to token and massetContract
  function approveOnce(address token) external {
       
       address massetContract = markets[token];
@@ -178,19 +179,12 @@ contract MStableOpportunityAll is IOpportunity, Initializable {
 
 function approveEach(address token) external {
         address massetContract = markets[token];
-        IERC20(token).safeApprove(massetContract, uint256(-1));  // already set in the script
+        IERC20(token).safeApprove(massetContract, uint256(-1));  
 }
  
 
-  /// @notice  The amount supplied + yield generated in the underlyng Opporutnity
-  ///
-  /// @param   token - address of the token to get the balance of
-  function getBalance(address token) external view returns (uint){
 
-      uint256 balance = helper.getSaveBalance(savingsContract,address(this));
-      return balance;
 
-  }
 
 
 

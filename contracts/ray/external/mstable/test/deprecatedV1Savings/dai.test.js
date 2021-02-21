@@ -46,7 +46,7 @@ const init = async () => {
   
   const DAI = '0x4f96fe3b7a6cf9725f59d353f723c1bdb64ca6aa'
  
- const opportunityAddress = '0x175F956bF97969b75c1655102DeFCFA0dd51eDE8'
+ const opportunityAddress = '0x53B63C6a5da9269921D86d94D911A72a5d25e3F7'
  
   
   const opportunityContract = new ethers.Contract(
@@ -170,10 +170,13 @@ const init = async () => {
     receipt = await result.wait();
     console.log(receipt);
 
-    result = await opportunity.supply(DAI, ethers.utils.parseEther('10'), true, options);
+    result = await opportunity.supply(DAI, ethers.utils.parseEther('1'), true, options);
     console.log(result);
     receipt = await result.wait();
     console.log(receipt);
+
+    getSupply = await opportunity.getSupply(DAI) 
+    console.log(getSupply[1].toString(),getSupply[2].toString())
 
     balanceAvailable = await opportunity.getBalance(DAI)
     console.log(balanceAvailable.toString(),'mUSD balance in wei')
@@ -194,6 +197,12 @@ const init = async () => {
   } catch (err) {
     console.log(err);
   }
+
+
+
+
+
+
  };
 
 init();
@@ -235,6 +244,21 @@ const OpportunityAbi = [
         "type": "address"
       }
     ],
+    "name": "approveEach",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
     "name": "approveOnce",
     "outputs": [],
     "payable": false,
@@ -252,6 +276,52 @@ const OpportunityAbi = [
     ],
     "name": "getBalance",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getSupply",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "",
